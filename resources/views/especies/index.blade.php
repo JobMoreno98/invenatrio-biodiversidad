@@ -40,7 +40,7 @@
             <div class="bg-white rounded-3xl shadow-xl p-8">
 
                 <div class="grid md:grid-cols-3 gap-5">
-                    
+
 
                     <input id="searchInput" type="text" placeholder="Buscar especie..."
                         class="col-span-2 border rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-primary">
@@ -50,32 +50,32 @@
                     </button>
 
                 </div>
-<!--
-                <div class="flex flex-wrap gap-3 mt-6">
+                <!--
+                    <div class="flex flex-wrap gap-3 mt-6">
 
-                    <button data-filter="todas"
-                        class="filter-btn active border border-primary text-primary px-5 py-2 rounded-full font-medium transition">
-                        Todas
-                    </button>
-                    <button data-filter="Flora"
-                        class="filter-btn border border-primary text-primary px-5 py-2 rounded-full font-medium transition">
-                        🌿 Flora
-                    </button>
-                    <button data-filter="Aves"
-                        class="filter-btn border border-primary text-primary px-5 py-2 rounded-full font-medium transition">
-                        🦜 Aves
-                    </button>
-                    <button data-filter="Mamíferos"
-                        class="filter-btn border border-primary text-primary px-5 py-2 rounded-full font-medium transition">
-                        🦊 Mamíferos
-                    </button>
-                    <button data-filter="Insectos"
-                        class="filter-btn border border-primary text-primary px-5 py-2 rounded-full font-medium transition">
-                        🦋 Insectos
-                    </button>
+                        <button data-filter="todas"
+                            class="filter-btn active border border-primary text-primary px-5 py-2 rounded-full font-medium transition">
+                            Todas
+                        </button>
+                        <button data-filter="Flora"
+                            class="filter-btn border border-primary text-primary px-5 py-2 rounded-full font-medium transition">
+                            🌿 Flora
+                        </button>
+                        <button data-filter="Aves"
+                            class="filter-btn border border-primary text-primary px-5 py-2 rounded-full font-medium transition">
+                            🦜 Aves
+                        </button>
+                        <button data-filter="Mamíferos"
+                            class="filter-btn border border-primary text-primary px-5 py-2 rounded-full font-medium transition">
+                            🦊 Mamíferos
+                        </button>
+                        <button data-filter="Insectos"
+                            class="filter-btn border border-primary text-primary px-5 py-2 rounded-full font-medium transition">
+                            🦋 Insectos
+                        </button>
 
-                </div>
--->
+                    </div>
+    -->
             </div>
 
         </div>
@@ -123,20 +123,25 @@
         const searchInput = document.getElementById("searchInput");
         let filtroActivo = "todas";
 
+        function limitText(html, limit = 130) {
+            const text = html.replace(/<[^>]*>/g, '');
+            return text.length > limit ? text.slice(0, limit) + '...' : text;
+        }
+
         function crearTarjeta(especie) {
             console.log(especie)
             return `
                 <div class="card bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition">
                     <div class="overflow-hidden">
-                        <img class="h-72 w-full object-cover" src="storage/imagenes/${especie.fotografia}">
+                        <img class="h-72 w-full object-cover" src="${especie.imagen}">
                     </div>
                     <div class="p-7">
                         <div class="flex justify-between">
-                            <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">
-                                ${especie.categoria}
+                            <span class="bg-green-100 text-green-700 px-3 py-1 rounded-xs text-sm">
+                                ${especie.cientifico}
                             </span>
                             <span class="${especie.estadoColor} font-semibold">
-                                ${especie.estado}
+                                ${especie.datos[0]['valor']}
                             </span>
                         </div>
                         <h3 class="text-2xl font-bold mt-5">
@@ -146,7 +151,7 @@
                             ${especie.cientifico}
                         </p>
                         <p class="mt-5 text-gray-600 leading-relaxed">
-                            Descripción: ${especie.descripcion}
+                            ${limitText(especie.contenido[0].contenido, 130)}
                         </p>
                         
                         <a href="${especie.ruta}" class="mt-8 text-primary font-bold">

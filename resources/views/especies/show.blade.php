@@ -23,6 +23,10 @@
             --tw-shadow: 0 20px 25px -5px var(--tw-shadow-color, #0000001a), 0 8px 10px -6px var(--tw-shadow-color, #0000001a);
             box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
         }
+
+        .contenido >h1 , .contenido>h2 {
+            color: oklch(43.2% .095 166.913) !important;
+        }
     </style>
 @endpush
 
@@ -44,11 +48,11 @@
         <div class="max-w-6xl mx-auto" style="width: fit-content;">
             <div class="flex flex-col md:flex-row bg-white rounded-3xl shadow-xl overflow-hidden">
                 @foreach ($especie->datos as $item)
-                    <div class="p-8 text-center {{ !$loop->first && !$loop->last ? 'border-x border-gray-300' : '' }}">
-                        <p class="text-gray-400 mt-4">
-                            {{ $item['label'] }}
+                    <div class="p-8 text-center  {{ !$loop->first && !$loop->last ? 'border-x border-gray-300' : '' }}">
+                        <p class="text-gray-400 mt-4 capitalize " style="color: #00bdfc">
+                            {{ mb_convert_case($item['label'], MB_CASE_TITLE, 'UTF-8') }}
                         </p>
-                        <strong>{{ $item['valor'] }}</strong>
+                        <strong class="">{{ mb_convert_case($item['valor'], MB_CASE_TITLE, 'UTF-8') }}</strong>
                     </div>
                 @endforeach
             </div>
@@ -57,7 +61,7 @@
 
     <!-- CONTENIDO EDITORIAL DESDE BD -->
     @isset($especie->contenido)
-        <section class="my-20 mx-4 md:mx-auto">
+        <section class="my-20 mx-4 md:mx-auto contenido">
             @foreach ($especie->contenido as $key => $item)
                 <div class="max-w-6xl mx-auto contenido leading-9 text-lg text-gray-600">
                     {!! $item['contenido'] !!}
@@ -69,7 +73,7 @@
     <!-- CARACTERÍSTICAS Y CURIOSIDAD -->
     <section class="py-12 bg-cream">
         <div class="max-w-7xl mx-auto px-8 grid lg:grid-cols-3 gap-12 items-start">
-            
+
             <!-- Columna de Características Dinámicas (Ocupa 2 de 3 columnas en pantallas grandes) -->
             <div class="lg:col-span-2">
                 <h2 class="text-4xl font-black mb-12">
@@ -78,7 +82,7 @@
 
                 <div class="grid md:grid-cols-2 gap-8">
                     @isset($especie->caracteristicas)
-                        @foreach($especie->caracteristicas as $caracteristica)
+                        @foreach ($especie->caracteristicas as $caracteristica)
                             <div class="bg-white rounded-3xl p-8 shadow-sm">
                                 <div class="text-5xl">
                                     {{ $caracteristica['icono'] ?? '🌿' }}

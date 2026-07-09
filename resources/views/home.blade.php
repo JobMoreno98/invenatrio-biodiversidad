@@ -4,10 +4,6 @@
 @extends('layouts.app')
 @push('css')
     <style>
-        body {
-            font-family: Manrope, sans-serif;
-        }
-
         .glass {
             backdrop-filter: blur(15px);
             background: rgba(255, 255, 255, .75);
@@ -37,7 +33,7 @@
                 <p class="uppercase tracking-[6px] text-secondary mb-4">
                     Enciclopedia Natural
                 </p>
-                <h1 class="text-6xl font-black text-white leading-tight">
+                <h1 class="md:text-6xl  text-xl font-black text-white leading-tight">
                     Descubre las especies que hacen único nuestro centro universitario.
 
                 </h1>
@@ -170,7 +166,7 @@
                             <div class="p-7">
                                 <div class="flex flex-wrap gap-2 justify-between items-center">
                                     <span
-                                        class="italic bg-green-50 text-green-700 px-3 py-1 rounded-full text-xs font-medium tracking-wide">
+                                        class="italic bg-green-100 text-green-700 px-3 py-1 rounded-lg text-xs font-medium tracking-wide">
                                         {{ $item->cientifico }}
                                     </span>
 
@@ -188,7 +184,7 @@
 
                                 @if (isset($item->contenido) && count($item->contenido) > 0)
                                     <p class="mt-4 text-gray-500 text-sm leading-relaxed line-clamp-3">
-                                        {{ Str::limit(strip_tags($item->contenido[0]['contenido']), 130, '...') }}
+                                        {!! Str::limit(strip_tags($item->contenido[0]['contenido']), 130, '...') !!}
                                     </p>
                                 @endif
                             </div>
@@ -196,7 +192,7 @@
 
                         <div class="p-7 pt-0 mt-auto">
                             <a href="{{ route('especies.show', $item->slug) }}"
-                                class="inline-flex items-center text-forest hover:text-green-700 font-bold text-sm tracking-wide transition group">
+                                class="inline-flex items-center text-forest hover:text-green-900 font-bold text-sm tracking-wide transition group text-green-700">
                                 Leer más
                                 <span
                                     class="transform transition-transform duration-200 group-hover:translate-x-1 ml-1">→</span>
