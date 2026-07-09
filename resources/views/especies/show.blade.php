@@ -24,8 +24,10 @@
             box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
         }
 
-        .contenido >h1 , .contenido>h2 {
-            color: oklch(43.2% .095 166.913) !important;
+        .contenido h1>span,
+        .contenido h2>span {
+            color: oklch(39.3% .095 152.535) !important ;
+            border-bottom: 2px solid grey;
         }
     </style>
 @endpush
@@ -71,19 +73,19 @@
     @endisset
 
     <!-- CARACTERÍSTICAS Y CURIOSIDAD -->
-    <section class="py-12 bg-cream">
-        <div class="max-w-7xl mx-auto px-8 grid lg:grid-cols-3 gap-12 items-start">
+    <section class="py-12 bg-cream mx-3">
+        <div class="max-w-7xl mx-auto px-4 md:px-8 justify-center grid lg:grid-cols-3 gap-12 items-start">
 
             <!-- Columna de Características Dinámicas (Ocupa 2 de 3 columnas en pantallas grandes) -->
-            <div class="lg:col-span-2">
-                <h2 class="text-4xl font-black mb-12">
+            <div class="lg:col-span-2 contenido">
+                <h2 class="text-4xl mb-12">
                     Características
                 </h2>
 
                 <div class="grid md:grid-cols-2 gap-8">
                     @isset($especie->caracteristicas)
                         @foreach ($especie->caracteristicas as $caracteristica)
-                            <div class="bg-white rounded-3xl p-8 shadow-sm">
+                            <div class="bg-white rounded-3xl p-4 shadow-sm">
                                 <div class="text-5xl">
                                     {{ $caracteristica['icono'] ?? '🌿' }}
                                 </div>
@@ -117,4 +119,9 @@
 @endsection
 
 @push('js')
+    <script>
+        document.querySelectorAll('.contenido h1, .contenido h2').forEach(h => {
+            h.innerHTML = `<span>${h.innerHTML}</span>`;
+        });
+    </script>
 @endpush

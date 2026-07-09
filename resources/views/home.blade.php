@@ -46,9 +46,9 @@
                                                             </p>
                                             -->
                 <div class="mt-10 flex gap-5">
-                    <button class="bg-primary px-8 py-4 rounded-full text-white hover:bg-green-700 transition">
+                    <a href="{{ route('especies.index') }}" class="bg-primary px-8 py-4 rounded-full text-white hover:bg-green-700 transition">
                         Explorar especies
-                    </button>
+                    </a>
                     <!--
                                                         <button class="bg-white/20 backdrop-blur text-white px-8 py-4 rounded-full">
                                                             Ver categorías

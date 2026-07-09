@@ -29,7 +29,7 @@
 
     <nav class="bg-white px-6 md:px-16 lg:px-24 xl:px-32 py-4 flex items-center justify-between relative">
         <div class="flex items-center gap-20">
-            <a href="https://prebuiltui.com">
+            <a href="{{ route('home') }}">
                 <img src="{{ asset('img/logo.png') }}" class="h-16" alt="">
             </a>
             <!-- Desktop Nav Items -->
