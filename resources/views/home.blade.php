@@ -4,11 +4,6 @@
 @extends('layouts.app')
 @push('css')
     <style>
-        .glass {
-            backdrop-filter: blur(15px);
-            background: rgba(255, 255, 255, .75);
-        }
-
         .hero {
             background-image:
                 linear-gradient(to right, rgba(0, 0, 0, .55), rgba(0, 0, 0, .15)),
@@ -37,104 +32,16 @@
                     Descubre las especies que hacen único nuestro centro universitario.
 
                 </h1>
-                <!--
-                                                            <p class="text-gray-200 mt-8 text-lg leading-relaxed">
 
-                                                                Explora información científica sobre flora, fauna y ecosistemas mediante una experiencia moderna y
-                                                                visual.
-
-                                                            </p>
-                                            -->
                 <div class="mt-10 flex gap-5">
                     <a href="{{ route('especies.index') }}" class="bg-primary px-8 py-4 rounded-full text-white hover:bg-green-700 transition">
                         Explorar especies
                     </a>
-                    <!--
-                                                        <button class="bg-white/20 backdrop-blur text-white px-8 py-4 rounded-full">
-                                                            Ver categorías
-                                                        </button>
-                                                        -->
                 </div>
             </div>
         </div>
     </section>
-    <!-- BUSCADOR
-        <section class="-mt-14 relative z-20">
-            <div class="max-w-5xl mx-auto px-6">
-                <div class="bg-white rounded-3xl shadow-xl p-8">
-                    <div class="grid md:grid-cols-3 gap-5">
-                        <input type="text" placeholder="Buscar especie..."
-                            class="col-span-2 border rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-primary">
 
-                                                           <select class="border rounded-xl px-5 py-4">
-                                                                    <option>Todos</option>
-                                                                    <option>Flora</option>
-                                                                    <option>Fauna</option>
-                                                                </select>
-                                            
-                        <button class="bg-primary rounded-xl text-white">
-                            Buscar
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-     CATEGORÍAS
-                                    <section class="py-24">
-                                        <div class="max-w-7xl mx-auto px-6">
-                                            <div class="flex justify-between items-center mb-12">
-                                                <div>
-                                                    <h2 class="text-4xl font-extrabold">
-                                                        Explora por categoría
-                                                    </h2>
-                                                    <p class="text-gray-500 mt-2">
-                                                        Selecciona un grupo biológico.
-                                                    </p>
-
-                                                </div>
-                                            </div>
-                                            <div class="grid md:grid-cols-4 gap-8">
-                                                <div class="bg-white rounded-3xl shadow-sm p-8 hover:shadow-xl transition">
-                                                    <div class="text-5xl">🌿</div>
-                                                    <h3 class="mt-5 font-bold text-xl">
-                                                        Flora
-                                                    </h3>
-                                                    <p class="mt-3 text-gray-500">
-                                                        Árboles, plantas, flores y helechos.
-                                                    </p>
-                                                </div>
-                                                <div class="bg-white rounded-3xl shadow-sm p-8 hover:shadow-xl transition">
-                                                    <div class="text-5xl">🦜</div>
-                                                    <h3 class="mt-5 font-bold text-xl">
-                                                        Aves
-                                                    </h3>
-                                                    <p class="mt-3 text-gray-500">
-                                                        Especies terrestres y migratorias.
-                                                    </p>
-                                                </div>
-                                                <div class="bg-white rounded-3xl shadow-sm p-8 hover:shadow-xl transition">
-                                                    <div class="text-5xl">🦊</div>
-                                                    <h3 class="mt-5 font-bold text-xl">
-                                                        Mamíferos
-                                                    </h3>
-                                                    <p class="mt-3 text-gray-500">
-                                                        Fauna silvestre y endémica.
-                                                    </p>
-                                                </div>
-                                                <div class="bg-white rounded-3xl shadow-sm p-8 hover:shadow-xl transition">
-                                                    <div class="text-5xl">🦋</div>
-                                                    <h3 class="mt-5 font-bold text-xl">
-                                                        Insectos
-                                                    </h3>
-                                                    <p class="mt-3 text-gray-500">
-                                                        Polinizadores y artrópodos.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </section>
-                                -->
-    <!-- ESPECIES -->
 
     <section class="pb-28 mt-5">
 

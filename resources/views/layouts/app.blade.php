@@ -14,11 +14,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
-
-    @stack('css')
-</head>
-
-<body class="bg-light text-dark">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
 
@@ -26,8 +21,13 @@
             font-family: "Geist", sans-serif;
         }
     </style>
+    @stack('css')
+</head>
 
-    <nav class="bg-white px-6 md:px-16 lg:px-24 xl:px-32 py-4 flex items-center justify-between relative">
+<body class="bg-light text-dark">
+
+
+    <nav class=" bg-white px-6 md:px-16 lg:px-24 xl:px-32 py-4 flex items-center justify-between relative">
         <div class="flex items-center gap-20">
             <a href="{{ route('home') }}">
                 <img src="{{ asset('img/logo.png') }}" class="h-16" alt="">

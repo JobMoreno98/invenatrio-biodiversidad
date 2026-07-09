@@ -42,10 +42,10 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-x-0 gap-y-1 md:gap-5">
 
 
-                    <input id="searchInput" type="text" placeholder="Buscar especie..."
-                        class="col-span-2 border rounded-md md:rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-primary">
+                    <input id="searchInput" type="text" placeholder="Buscar..."
+                        class="col-span-2 border rounded-md md:rounded-xl px-5 py-2 md:py-4 focus:outline-none focus:ring-2 focus:ring-primary">
 
-                    <button class="bg-primary rounded-md md:rounded-xl text-white w-full">
+                    <button class="bg-primary rounded-md md:rounded-xl text-white w-full py-1">
                         Buscar
                     </button>
 
@@ -100,8 +100,7 @@
 
             <div id="grid" class="grid md:grid-cols-3 gap-10">
 
-                <!-- Las tarjetas se generan con JS a partir del arreglo "especies" -->
-
+           
             </div>
 
             <p id="empty" class="hidden text-center text-gray-400 py-20">
@@ -114,7 +113,6 @@
 @endsection
 @push('js')
     <script>
-        // Fuente única de datos: agrega o edita especies aquí y se reflejan en toda la página.
         const especies = @json($especies);
 
         const grid = document.getElementById("grid");
