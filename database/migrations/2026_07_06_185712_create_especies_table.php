@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('nombre');
             $table->string('slug');
-            $table->string('sabias');
+            $table->longText('sabias');
             $table->string('cientifico');
             $table->string('fotografia');
             $table->longText('contenido');                        
