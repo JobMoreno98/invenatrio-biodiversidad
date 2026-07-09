@@ -39,13 +39,13 @@
 
             <div class="bg-white rounded-3xl shadow-xl p-8">
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-1 md:gap-5">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-x-0 gap-y-1 md:gap-5">
 
 
                     <input id="searchInput" type="text" placeholder="Buscar especie..."
-                        class="col-span-2 border rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-primary">
+                        class="col-span-2 border rounded-md md:rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-primary">
 
-                    <button class="bg-primary rounded-xl text-white w-full">
+                    <button class="bg-primary rounded-md md:rounded-xl text-white w-full">
                         Buscar
                     </button>
 
@@ -136,11 +136,11 @@
                         <img class="h-72 w-full object-cover" src="${especie.imagen}">
                     </div>
                     <div class="p-7">
-                        <div class="flex justify-between">
-                            <span class="bg-green-100 text-green-700 px-3 py-1 rounded-xs text-sm">
+                        <div class="flex justify-between items-center">
+                            <span class="bg-green-100 text-green-700 px-2 md:px-3 py-1  rounded-lg text-sm">
                                 ${especie.cientifico}
                             </span>
-                            <span class="${especie.estadoColor} font-semibold">
+                            <span class="${especie.estadoColor}  text-gray-500 font-semibold">
                                 ${especie.datos[0]['valor']}
                             </span>
                         </div>
