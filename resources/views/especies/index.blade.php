@@ -39,18 +39,18 @@
 
             <div class="bg-white rounded-3xl shadow-xl p-8">
 
-                <div class="grid md:grid-cols-3 gap-5">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-1 md:gap-5">
 
 
                     <input id="searchInput" type="text" placeholder="Buscar especie..."
                         class="col-span-2 border rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-primary">
 
-                    <button class="bg-primary rounded-xl text-white">
+                    <button class="bg-primary rounded-xl text-white w-full">
                         Buscar
                     </button>
 
                 </div>
-                <!--
+                {{-- 
                     <div class="flex flex-wrap gap-3 mt-6">
 
                         <button data-filter="todas"
@@ -75,7 +75,7 @@
                         </button>
 
                     </div>
-    -->
+     --}}
             </div>
 
         </div>
