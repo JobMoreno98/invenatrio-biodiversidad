@@ -33,8 +33,8 @@
         }
 
         /* 2. El truco real ocurre en el span */
-        .contenido h1>span,
-        .contenido h2>span {
+        .contenido h1 > span,
+        .contenido h2 > span {
             /* Mantiene el comportamiento de texto inline para que el borde abrace solo las letras */
             display: inline;
 
@@ -136,10 +136,3 @@
     </section>
 @endsection
 
-@push('js')
-    <script>
-        document.querySelectorAll('.contenido h1, .contenido h2').forEach(h => {
-            h.innerHTML = `<span>${h.innerHTML}</span>`;
-        });
-    </script>
-@endpush
