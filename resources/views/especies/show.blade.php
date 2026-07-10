@@ -1,5 +1,5 @@
 @php
-    $title = 'ESPECIES';
+    $title = $especie->nombre . ' - ESPECIES';
 @endphp
 @extends('layouts.app')
 @push('css')
@@ -24,10 +24,28 @@
             box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
         }
 
+        /* 1. El H1/H2 se mantiene como bloque completo (para respetar el flujo de los floats) */
+        .contenido h1,
+        .contenido h2 {
+            display: block;
+            clear: both;
+            /* Opcional: si quieres que los títulos siempre bajen y no se queden flotando al lado de una imagen */
+        }
+
+        /* 2. El truco real ocurre en el span */
         .contenido h1>span,
         .contenido h2>span {
-            color: oklch(39.3% .095 152.535) !important ;
-            border-bottom: 2px solid grey;
+            /* Mantiene el comportamiento de texto inline para que el borde abrace solo las letras */
+            display: inline;
+
+            /* El color base por defecto */
+            color: oklch(39.3% .095 152.535);
+
+            /* La magia que querías: el borde sigue al color del texto */
+            border-bottom: 2px solid currentcolor;
+
+            /* Un pequeño truco visual por si el borde queda muy pegado a las letras */
+            padding-bottom: 2px;
         }
     </style>
 @endpush
