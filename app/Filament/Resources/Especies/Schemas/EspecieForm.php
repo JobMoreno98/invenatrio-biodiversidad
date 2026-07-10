@@ -51,7 +51,7 @@ class EspecieForm
                         Tab::make('Datos Rápidos')
                             ->icon('heroicon-o-table-cells')
                             ->schema([
-                                Repeater::make('datos')
+                                Repeater::make('datos')->itemLabel(fn (array $state): ?string => $state['label'] ?? null)->collapsed()
                                     ->label('Métricas / Datos de Cabecera')
                                     ->schema([
                                         TextInput::make('label')
@@ -60,7 +60,7 @@ class EspecieForm
                                         TextInput::make('valor')
                                             ->label('Valor (ej: Magnoliaceae, 15 m)')
                                             ->required(),
-                                    ])
+                                    ])->grid(2)
                                     ->columns(2)
                                     ->addActionLabel('Añadir Dato Rápido')
                                     ->columnSpanFull(),
@@ -99,7 +99,7 @@ class EspecieForm
                                             ->required()
                                             ->columnSpanFull(),
                                     ])
-                                    ->columns(2)
+                                    ->columns(2)->itemLabel(fn (array $state): ?string => $state['titulo'] ?? null)->collapsed()
                                     ->grid(2) // Hace que en el panel administrativo se organicen en 2 columnas paralelas
                                     ->addActionLabel('Añadir Característica')
                                     ->columnSpanFull(),
