@@ -84,7 +84,8 @@ class EspecieForm
                                                 '🌎' => '🌎 Planeta / Distribución',
                                                 '📏' => '📏 Regla / Altura',
                                                 '🌰' => '🌰 Fruto / Semilla',
-                                                '🪴' => '🪴 Suelo'
+                                                '🪴' => '🪴 Suelo',
+                                                '☀️' => '☀️ Exposición solar'
                                             ])
                                             ->default('🌿')
                                             ->required(),
