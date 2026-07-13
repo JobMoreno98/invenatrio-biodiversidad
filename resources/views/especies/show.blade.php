@@ -48,13 +48,12 @@
         }
 
         @media(max-width:800px) {
-
-            .contenido img.alignleft,
-            .contenido img.alignright {
-                float: none;
+            .contenido img {
+                float: none !important;
                 display: block;
-                margin: auto;
+                margin: auto !important;
                 max-width: 300px;
+                height: auto !important;
             }
 
             .contenido h1,
