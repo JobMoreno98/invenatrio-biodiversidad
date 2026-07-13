@@ -28,13 +28,12 @@
         .contenido h1,
         .contenido h2 {
             display: block;
-            clear: both;
             /* Opcional: si quieres que los títulos siempre bajen y no se queden flotando al lado de una imagen */
         }
 
         /* 2. El truco real ocurre en el span */
-        .contenido h1 > span,
-        .contenido h2 > span {
+        .contenido h1>span,
+        .contenido h2>span {
             /* Mantiene el comportamiento de texto inline para que el borde abrace solo las letras */
             display: inline;
 
@@ -46,6 +45,19 @@
 
             /* Un pequeño truco visual por si el borde queda muy pegado a las letras */
             padding-bottom: 2px;
+        }
+
+        @media(max-width:) {
+            .contenido img {
+                max-width: 300px;
+                clear: both;
+            }
+
+            .contenido h1,
+            .contenido h2 {
+                clear: both;
+                /* Opcional: si quieres que los títulos siempre bajen y no se queden flotando al lado de una imagen */
+            }
         }
     </style>
 @endpush
@@ -135,4 +147,3 @@
         </div>
     </section>
 @endsection
-
