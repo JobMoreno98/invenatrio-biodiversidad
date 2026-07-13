@@ -50,7 +50,7 @@
         @media(max-width:800px) {
             .contenido img {
                 max-width: 300px;
-                clear: both;
+                float: none;
                 margin: auto;
             }
 
