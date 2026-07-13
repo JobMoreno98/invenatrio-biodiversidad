@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use Awcodes\Curator\CuratorPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -10,6 +11,7 @@ use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Support\Icons\Heroicon;
 use Filament\Widgets\AccountWidget;
 use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
@@ -27,6 +29,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->viteTheme('resources/css/filament/admin/theme.css')
             ->login()
             ->colors([
                 'primary' => Color::Amber,
@@ -51,7 +54,18 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
-            ])
+            ])->plugins([
+            CuratorPlugin::make()
+                ->label('Media')
+                ->pluralLabel('Media')
+                ->navigationIcon(Heroicon::OutlinedPhoto)
+                ->navigationGroup('Content')
+                ->navigationSort(3)
+                ->showBadge(true) 
+                ->registerNavigation(true)
+                ->curations(true)
+                ->fileSwap(true),  
+        ])
             ->authMiddleware([
                 Authenticate::class,
             ]);
