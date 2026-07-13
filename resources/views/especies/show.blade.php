@@ -47,7 +47,7 @@
             padding-bottom: 2px;
         }
 
-        @media(max-width:) {
+        @media(max-width:800px) {
             .contenido img {
                 max-width: 300px;
                 clear: both;
