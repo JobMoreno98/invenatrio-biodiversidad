@@ -51,6 +51,7 @@
             .contenido img {
                 max-width: 300px;
                 clear: both;
+                margin: auto;
             }
 
             .contenido h1,
