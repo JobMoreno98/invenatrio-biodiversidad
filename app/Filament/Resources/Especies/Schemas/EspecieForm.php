@@ -6,14 +6,10 @@ use AmidEsfahani\FilamentTinyEditor\TinyEditor;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Tabs;
-use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Schemas\Components\Grid as ComponentsGrid;
 use Filament\Schemas\Components\Tabs as ComponentsTabs;
 use Filament\Schemas\Components\Tabs\Tab;
-use Filament\Support\Enums\Alignment;
-
 class EspecieForm
 {
     public static function configure($form) // Ajustado al estándar nativo de Filament Form / Schema
@@ -28,7 +24,7 @@ class EspecieForm
                             ->schema([
                                 FileUpload::make('fotografia') // Coincide con $especie->imagen en tu Blade
                                     ->label('Fotografía Principal')->avatar()
-                                    ->disk('imagenes')
+                                    ->disk('imagenes')->imageEditorAspectRatioOptions(['16:9'])
                                     ->directory('especies')
                                     ->image()->imageEditor()
                                     ->required()
