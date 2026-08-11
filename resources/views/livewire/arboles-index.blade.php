@@ -1,6 +1,6 @@
 <div>
     <div class="bg-white rounded-3xl shadow-xl p-8">
-          <h1 class="uppercase text-center">un árbol es nuestro contacto mas intimo con la naturaleza</h1>
+          
         <div class="grid grid-cols-1 md:grid-cols-3 gap-x-0 gap-y-1 md:gap-5">
           
             <input wire:model.live.debounce.400ms="search" type="text"

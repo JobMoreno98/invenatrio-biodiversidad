@@ -47,10 +47,10 @@
             <h1 class="text-6xl font-black text-white text-center">
                 Adopta un árbol
             </h1>
-            <p >
-                <blockquote class="text-xl mt-4 text-green-100 max-w-2xl">
-                   adopta
-                </blockquote>
+            <p>
+            <h1 class="uppercase text-center text-2xl font-black text-white text-center border-t-4 border-white pt-1 mt-1">
+                se parte de nuestro ecosistema CUCSH
+            </h1>
             </p>
         </div>
     </section>
