@@ -11,6 +11,7 @@ use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Support\Enums\Width;
 use Filament\Support\Icons\Heroicon;
 use Filament\Widgets\AccountWidget;
 use Filament\Widgets\FilamentInfoWidget;
@@ -65,7 +66,7 @@ class AdminPanelProvider extends PanelProvider
                 ->registerNavigation(true)
                 ->curations(true)
                 ->fileSwap(true),  
-        ])
+        ])->globalSearch(false)->maxContentWidth(Width::Full)
             ->authMiddleware([
                 Authenticate::class,
             ]);

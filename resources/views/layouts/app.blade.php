@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ filled($title ?? null) ? $title  . ' - ' . config('app.name', 'Laravel') : config('app.name', 'Laravel') }}
+    <title>
+        {{ filled($title ?? null) ? $title . ' - ' . config('app.name', 'Laravel') : config('app.name', 'Laravel') }}
     </title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -27,15 +28,18 @@
 <body class="bg-light text-dark">
 
 
-    <nav class=" bg-white px-6 md:px-16 lg:px-24 xl:px-32 py-4 flex items-center justify-between relative">
-        <div class="flex items-center gap-20">
+    <nav class=" bg-white px-6 md:px-16 lg:px-24 xl:px-32 py-4  " style="    width: 100%;">
+        <div class="flex items-center gap-20 justify-between " style="    width: 100%;">
             <a href="{{ route('home') }}">
                 <img src="{{ asset('img/logo.png') }}" class="h-16" alt="">
             </a>
+            
             <!-- Desktop Nav Items -->
             <div class="hidden md:flex items-center gap-8">
                 <a href="{{ route('home') }}" class="text-sm text-zinc-500 hover:text-zinc-800"
                     style="font-size: 20px;">Inicio</a>
+                <a href="{{ route('adopciones.index') }}" class="text-sm text-green-600 hover:text-green-800"
+                    style="font-size: 20px;">Adopta tu árbol</a>
             </div>
         </div>
 
@@ -52,6 +56,9 @@
             class="absolute top-full left-0 w-full bg-white border-t border-zinc-200 flex-col p-5 gap-1 md:hidden z-50 hidden">
             <a href="{{ route('home') }}" class="px-4 py-2.5 rounded-lg text-sm text-zinc-500 hover:bg-green-50">
                 Inicio</a>
+            <a href="{{ route('adopciones.index') }}"
+                class="px-4 py-2.5 rounded-lg text-sm text-zinc-500 hover:bg-green-50">
+                Adopta tu árbol</a>
         </div>
     </nav>
 

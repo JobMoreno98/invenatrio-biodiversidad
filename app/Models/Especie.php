@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Mews\Purifier\Facades\Purifier;
+
 
 class Especie extends Model
 {
@@ -46,5 +49,9 @@ class Especie extends Model
     public function getRouteKeyName(): string
     {
         return 'slug';
+    }
+    public function adopciones()
+    {
+        return $this->hasMany(Adopcion::class);
     }
 }
