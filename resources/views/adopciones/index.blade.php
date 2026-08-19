@@ -18,7 +18,8 @@
                 linear-gradient(to right, rgba(0, 0, 0, .40), rgba(0, 0, 0, .40)),
                 url("{{ asset('img/adopcion.jpeg') }}");
             background-size: cover;
-            background-position: center;
+            background-position: top;
+            background-position: center 35%;
         }
 
         .card:hover img {

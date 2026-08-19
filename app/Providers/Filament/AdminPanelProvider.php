@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use Awcodes\Curator\CuratorPlugin;
+use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -55,18 +56,42 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
-            ])->plugins([
-            CuratorPlugin::make()
-                ->label('Media')
-                ->pluralLabel('Media')
-                ->navigationIcon(Heroicon::OutlinedPhoto)
-                ->navigationGroup('Content')
-                ->navigationSort(3)
-                ->showBadge(true) 
-                ->registerNavigation(true)
-                ->curations(true)
-                ->fileSwap(true),  
-        ])->globalSearch(false)->maxContentWidth(Width::Full)
+            ])
+
+            ->plugins([
+                /*
+                CuratorPlugin::make()
+                    ->label('Media')
+                    ->pluralLabel('Media')
+                    ->navigationIcon(Heroicon::OutlinedPhoto)
+                    ->navigationGroup('Content')
+                    ->navigationSort(3)
+                    ->showBadge(true)
+                    ->registerNavigation(true)
+                    ->curations(true)
+                    ->fileSwap(true),
+*/
+                FilamentShieldPlugin::make()
+                    ->gridColumns([
+                        'default' => 1,
+                        'sm' => 2,
+                        'lg' => 3
+                    ])
+                    ->sectionColumnSpan(1)
+                    ->checkboxListColumns([
+                        'default' => 1,
+                        'sm' => 2,
+                        'lg' => 4,
+                    ])
+                    ->resourceCheckboxListColumns([
+                        'default' => 1,
+                        'sm' => 2,
+                    ])
+                    ->navigationLabel('Roles y permisos')                  // string|Closure|null
+                    ->navigationIcon('heroicon-o-user')         // string|Closure|null  
+                    ->activeNavigationIcon('heroicon-s-user')   // string|Closure|null
+                    ->navigationGroup('Sistema'),
+            ])->globalSearch(false)->maxContentWidth(Width::Full)
             ->authMiddleware([
                 Authenticate::class,
             ]);
