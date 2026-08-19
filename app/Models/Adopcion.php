@@ -27,8 +27,8 @@ class Adopcion extends Model
     {
         return Attribute::make(
             get: fn() => $this->foto
-                ? Storage::disk('imagenes')->url($this->foto)
-                : null, // o una imagen por defecto: asset('images/default.jpg')
+                ? Storage::disk('public')->url($this->foto)
+                : null, 
         );
     }
 
