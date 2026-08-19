@@ -14,7 +14,7 @@ class AdopcionForm
     {
         return $schema
             ->components([
-                FileUpload::make('foto')->columnSpanFull()->image(),
+                FileUpload::make('foto')->columnSpanFull()->image()->disk('public')->directory('adopciones'),
                 TextInput::make('adoptante')->nullable(),
                 Select::make('especie_id')->relationship('especie','nombre')->required(),
                 TinyEditor::make('contenido')->profile('default')->columnSpanFull(),
