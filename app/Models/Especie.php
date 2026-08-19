@@ -34,18 +34,47 @@ class Especie extends Model
         return Storage::disk('imagenes')->url($this->fotografia);
     }
 
-    protected static function booted()
+
+    protected static function booted(): void
     {
-        // Se ejecuta justo antes de insertar en la base de datos
-        static::creating(function ($especie) {
-            $especie->slug = Str::slug($especie->nombre);
+        static::creating(function ($model) {
+            $model->slug = static::generateUniqueSlug($model->nombre);
         });
 
-        // Se ejecuta justo antes de actualizar en la base de datos (opcional)
-        static::updating(function ($especie) {
-            $especie->slug = Str::slug($especie->nombre);
+        static::updating(function ($model) {
+            // Solo regenera el slug si el nombre cambió
+            if ($model->isDirty('nombre')) {
+                $model->slug = static::generateUniqueSlug($model->nombre, $model->id);
+            }
         });
     }
+
+    protected static function generateUniqueSlug(string $nombre, $ignoreId = null): string
+    {
+        $slug = Str::slug($nombre);
+        $originalSlug = $slug;
+        $count = 1;
+
+        $query = static::where('slug', $slug);
+
+        if ($ignoreId) {
+            $query->where('id', '!=', $ignoreId);
+        }
+
+        while ($query->exists()) {
+            $slug = "{$originalSlug}-{$count}";
+            $count++;
+
+            $query = static::where('slug', $slug);
+            if ($ignoreId) {
+                $query->where('id', '!=', $ignoreId);
+            }
+        }
+
+        return $slug;
+    }
+
+
     public function getRouteKeyName(): string
     {
         return 'slug';
