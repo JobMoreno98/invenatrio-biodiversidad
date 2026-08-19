@@ -14,33 +14,29 @@ class CreateAdopcion extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        // 1. Buscamos la especie usando el ID que viene del formulario
-        $especie = Especie::find($data['especie_id']);
+        $especie = Especie::find($data['especie_id'] ?? null);
 
-if ($especie) {
-        $prefijo = strtoupper(substr($especie->nombre, 0, 3));
+        if ($especie && $especie->slug) {
+            // Convertimos el slug a mayúsculas (ej: "perro-mestizo" -> "PERRO-MESTIZO")
+            $prefijo = strtoupper($especie->slug);
 
-        // 1. Buscamos solo registros que tengan la misma especie y un folio con este prefijo
-        $ultimoFolio = Adopcion::where('especie_id', $especie->id)
-            ->where('folio', 'LIKE', "{$prefijo}-%")
-            ->pluck('folio')
-            ->map(function ($folio) {
-                // Extraemos únicamente la parte numérica final
-                $partes = explode('-', $folio);
-                return (int) end($partes);
-            })
-            ->max(); // Obtenemos el número más alto para esta especie
+            // Buscamos el último consecutivo usando el slug como prefijo
+            $ultimoFolio = Adopcion::where('especie_id', $especie->id)
+                ->where('folio', 'LIKE', "{$prefijo}-%")
+                ->pluck('folio')
+                ->map(function ($folio) {
+                    $partes = explode('-', $folio);
+                    return (int) end($partes);
+                })
+                ->max();
 
-        // 2. Si no hay ninguno previa, iniciamos en 1; de lo contrario incrementamos +1
-        $siguienteNumero = $ultimoFolio ? ($ultimoFolio + 1) : 1;
+            $siguienteNumero = $ultimoFolio ? ($ultimoFolio + 1) : 1;
+            $codigo = str_pad($siguienteNumero, 3, '0', STR_PAD_LEFT);
 
-        // 3. Formateamos a 3 dígitos (ej: PER-001)
-        $codigo = str_pad($siguienteNumero, 3, '0', STR_PAD_LEFT);
+            // Resultado ej: PERRO-001 o PERRO-MESTIZO-001
+            $data['folio'] = "{$prefijo}-{$codigo}";
+        }
 
-        $data['folio'] = "{$prefijo}-{$codigo}";
-    }
-
-        // Retornamos el arreglo de datos modificado
         return $data;
     }
 }
