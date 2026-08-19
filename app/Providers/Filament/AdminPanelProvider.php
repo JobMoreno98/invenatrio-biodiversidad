@@ -91,7 +91,9 @@ class AdminPanelProvider extends PanelProvider
                     ->navigationIcon('heroicon-o-user')         // string|Closure|null  
                     ->activeNavigationIcon('heroicon-s-user')   // string|Closure|null
                     ->navigationGroup('Sistema'),
-            ])->globalSearch(false)->maxContentWidth(Width::Full)
+            ])->globalSearch(false)
+            ->profile(isSimple: false)
+            ->maxContentWidth(Width::Full)
             ->authMiddleware([
                 Authenticate::class,
             ]);
