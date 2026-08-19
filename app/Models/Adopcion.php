@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Support\Facades\Storage;
 use Mews\Purifier\Facades\Purifier;
 
 class Adopcion extends Model
@@ -19,6 +20,15 @@ class Adopcion extends Model
     {
         return Attribute::make(
             set: fn($value) => Purifier::clean($value),
+        );
+    }
+
+    protected function imagenUrl(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->foto
+                ? Storage::disk('imagenes')->url($this->foto)
+                : null, // o una imagen por defecto: asset('images/default.jpg')
         );
     }
 

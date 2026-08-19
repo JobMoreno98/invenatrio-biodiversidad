@@ -23,38 +23,33 @@ class EditAdopcion extends EditRecord
     }
     protected function mutateFormDataBeforeSave(array $data): array
     {
-        // Verificamos si la especie_id del formulario es DIFERENTE a la del registro actual
-        $adopcion = Adopcion::find($this->record->id)->value('especie_id');
+        // 1. Accedemos directamente a la especie actual en la base de datos desde $this->record
+        $especieIdAnterior = $this->record->especie_id;
 
-        if ($data['especie_id'] != $adopcion) {
+        // 2. Solo recalculamos el folio si la especie cambió en el formulario
+        if (isset($data['especie_id']) && $data['especie_id'] != $especieIdAnterior) {
 
-            // 1. Buscamos la NUEVA especie usando el ID que viene del formulario
             $especie = Especie::find($data['especie_id']);
 
             if ($especie) {
-                // 2. Obtenemos el prefijo (3 primeras letras de la especie)
                 $prefijo = strtoupper(substr($especie->nombre, 0, 3));
 
-                // 3. Buscamos la última adopción registrada de esta misma especie
-                $ultimaAdopcion = Adopcion::where('especie_id', $especie->id)
-                    ->latest('id') // Ordenamos por el ID más reciente
-                    ->first();
+                // 3. Buscamos el número máximo asignado a la NUEVA especie
+                $ultimoFolio = Adopcion::where('especie_id', $especie->id)
+                    ->where('folio', 'LIKE', "{$prefijo}-%")
+                    ->pluck('folio')
+                    ->map(function ($folio) {
+                        $partes = explode('-', $folio);
+                        return (int) end($partes);
+                    })
+                    ->max();
 
-                $siguienteNumero = 1; // Por defecto empezamos en 1
+                $siguienteNumero = $ultimoFolio ? ($ultimoFolio + 1) : 1;
 
-                if ($ultimaAdopcion && $ultimaAdopcion->folio) {
-                    // Si ya existe una, separamos el prefijo del número (ej: PER-005)
-                    $partes = explode('-', $ultimaAdopcion->folio);
+                // 4. Formateamos a 3 dígitos (ajusta a 4 si prefieres 0001)
+                $codigo = str_pad($siguienteNumero, 3, '0', STR_PAD_LEFT);
 
-                    // Tomamos la última parte (005), la convertimos a entero y le sumamos 1
-                    $ultimoNumero = (int) end($partes);
-                    $siguienteNumero = $ultimoNumero + 1;
-                }
-
-                // 4. Formateamos el número para que tenga 3 dígitos con ceros a la izquierda
-                $codigo = str_pad($siguienteNumero, 4, '0', STR_PAD_LEFT);
-
-                // 5. Asignamos el NUEVO folio final al arreglo de datos
+                // 5. Asignamos el nuevo folio
                 $data['folio'] = "{$prefijo}-{$codigo}";
             }
         }

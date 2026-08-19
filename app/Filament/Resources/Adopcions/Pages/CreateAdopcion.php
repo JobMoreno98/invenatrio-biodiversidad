@@ -17,33 +17,28 @@ class CreateAdopcion extends CreateRecord
         // 1. Buscamos la especie usando el ID que viene del formulario
         $especie = Especie::find($data['especie_id']);
 
-        if ($especie) {
-            // 1. Obtenemos el prefijo (3 primeras letras de la especie)
-            $prefijo = strtoupper(substr($especie->nombre, 0, 3));
+if ($especie) {
+        $prefijo = strtoupper(substr($especie->nombre, 0, 3));
 
-            // 2. Buscamos la última adopción registrada de esta misma especie
-            $ultimaAdopcion = Adopcion::where('especie_id', $especie->id)
-                ->latest('id') // Ordenamos por el ID más reciente
-                ->first();
+        // 1. Buscamos solo registros que tengan la misma especie y un folio con este prefijo
+        $ultimoFolio = Adopcion::where('especie_id', $especie->id)
+            ->where('folio', 'LIKE', "{$prefijo}-%")
+            ->pluck('folio')
+            ->map(function ($folio) {
+                // Extraemos únicamente la parte numérica final
+                $partes = explode('-', $folio);
+                return (int) end($partes);
+            })
+            ->max(); // Obtenemos el número más alto para esta especie
 
-            $siguienteNumero = 1; // Por defecto empezamos en 1
+        // 2. Si no hay ninguno previa, iniciamos en 1; de lo contrario incrementamos +1
+        $siguienteNumero = $ultimoFolio ? ($ultimoFolio + 1) : 1;
 
-            if ($ultimaAdopcion && $ultimaAdopcion->folio) {
-                // Si ya existe una, separamos el prefijo del número (ej: PER-005)
-                $partes = explode('-', $ultimaAdopcion->folio);
+        // 3. Formateamos a 3 dígitos (ej: PER-001)
+        $codigo = str_pad($siguienteNumero, 3, '0', STR_PAD_LEFT);
 
-                // Tomamos la última parte (005), la convertimos a entero y le sumamos 1
-                $ultimoNumero = (int) end($partes);
-                $siguienteNumero = $ultimoNumero + 1;
-            }
-
-            // 3. Formateamos el número para que tenga 3 dígitos con ceros a la izquierda (001, 002, 015, etc.)
-            // Puedes cambiar el '3' por el número de dígitos que prefieras
-            $codigo = str_pad($siguienteNumero, 3, '0', STR_PAD_LEFT);
-
-            // 4. Asignamos el folio final
-            $data['folio'] = "{$prefijo}-{$codigo}";
-        }
+        $data['folio'] = "{$prefijo}-{$codigo}";
+    }
 
         // Retornamos el arreglo de datos modificado
         return $data;

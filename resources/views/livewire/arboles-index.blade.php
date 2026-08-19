@@ -40,7 +40,7 @@
                     @foreach ($adopciones as $adopcion)
                         @php
                             $disponible = blank($adopcion->adoptante);
-                            $foto = $adopcion->foto ? asset('storage/' . $adopcion->foto) : $adopcion->especie->imagen;
+                            $foto = $adopcion->imagen_url;
                         @endphp
                         <div wire:key="arbol-{{ $adopcion->id }}"
                             class="card bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition">
