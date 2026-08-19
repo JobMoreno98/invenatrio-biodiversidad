@@ -19,9 +19,22 @@ class UserForm
                     ->label('Email address')
                     ->email()
                     ->required(),
+
                 TextInput::make('password')
+                    ->label('Contraseña')
                     ->password()
-                    ->required(),
+                    ->revealable()
+                    ->required(fn(string $context): bool => $context === 'create')
+                    ->dehydrated(fn($state) => filled($state))
+                    ->maxLength(255),
+
+                TextInput::make('password_confirmation')
+                    ->label('Confirmar contraseña')
+                    ->password()
+                    ->revealable()
+                    ->same('password')
+                    ->required(fn(string $context): bool => $context === 'create')
+                    ->dehydrated(false),
 
                 Select::make('roles')
                     ->relationship('roles', 'name')
